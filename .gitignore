@@ -1,0 +1,7 @@
+/.bundle/
+/vendor/gems/
+/Gemfile.lock
+pkg/
+.ruby-*
+puppet-lint-*.gem
+coverage/
