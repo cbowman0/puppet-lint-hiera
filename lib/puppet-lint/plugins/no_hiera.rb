@@ -9,7 +9,7 @@ PuppetLint.new_check(:no_hiera) do
       original_function = function_token.value
 
       notify :error, {
-        message: "#{original_function}() function call. Dont do this!",
+        message: "#{original_function}() function call. Use lookup() instead.",
         line:    key_token.line,
         column:  key_token.column,
       }

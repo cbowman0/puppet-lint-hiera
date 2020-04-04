@@ -20,7 +20,7 @@ describe 'no_hiera' do
   # and these should cause failiures
 
   context 'class with a hiera call in class' do
-    let(:msg) { 'hiera() function call. Dont do this!' }
+    let(:msg) { 'hiera() function call. Use lookup() instead.' }
 
     let(:code) do
       <<-EOS
@@ -42,7 +42,7 @@ describe 'no_hiera' do
   end
 
   context 'class with a hiera call in params' do
-    let(:msg) { 'hiera() function call. Dont do this!' }
+    let(:msg) { 'hiera() function call. Use lookup() instead.' }
 
     let(:code) do
       <<-EOS
