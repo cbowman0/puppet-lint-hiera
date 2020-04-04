@@ -54,7 +54,7 @@ describe 'lookup' do
   # and these should cause failiures
 
   context 'class with a lookup call in params' do
-    let(:msg) { 'lookup() function call. Dont do this!' }
+    let(:msg) { 'lookup() function call found in class. Only use in class params.' }
 
     let(:code) do
       <<-EOS
@@ -73,12 +73,12 @@ describe 'lookup' do
     end
 
     it 'should create an error' do
-      expect(problems).to contain_error(msg).on_line(3).in_column(31)
+      expect(problems).to contain_error(msg).on_line(2).in_column(29)
     end
   end
 
   context 'class with a lookup call in class' do
-    let(:msg) { 'lookup() function call. Dont do this!' }
+    let(:msg) { 'lookup() function call found in class. Only use in class params.' }
 
     let(:code) do
       <<-EOS

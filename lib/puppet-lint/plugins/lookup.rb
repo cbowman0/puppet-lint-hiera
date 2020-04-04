@@ -16,14 +16,16 @@ PuppetLint.new_check(:lookup) do
     end
 
     tokens.select { |t| (t.type == :NAME or t.type == :FUNCTION_NAME) and functions.include? t.value }.each do |function_token|
-      next unless function_token.next_code_token.type == :LPAREN
-      next if lookups_in_parameters.include? function_token
+      parent_class_name = parent_class.value
+      is_profile = parent_class_name.match(/^profile::.*/)
+      next unless function_token.next_code_token.type == :LPAREN and !is_profile
+      next if lookups_in_parameters.include? function_token and is_profile
 
       key_token = function_token.next_code_token.next_code_token
       lookup_key_token = function_token.prev_code_token.prev_code_token
 
       notify :error, {
-        message: "#{function_token.value}() function call. Dont do this!",
+        message: "#{function_token.value}() function call found in class. Only use in class params.",
         line:    key_token.line,
         column:  key_token.column,
       }
