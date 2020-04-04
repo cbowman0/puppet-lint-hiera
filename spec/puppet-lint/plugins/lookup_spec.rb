@@ -35,7 +35,10 @@ describe 'lookup' do
     end
   end
 
+  # and these should cause failiures
   context 'profile with a lookup call in class' do
+    let(:msg) { 'lookup() function call found in profile class. Only use in profile params.' }
+
     let(:code) do
       <<-EOS
         class profile::lookup_call_class {
@@ -46,15 +49,17 @@ describe 'lookup' do
       EOS
     end
 
-    it 'should not detect any problems' do
-      expect(problems).to have(0).problems
+    it 'should detect a single problem' do
+      expect(problems).to have(1).problems
+    end
+
+    it 'should create an error' do
+      expect(problems).to contain_error(msg).on_line(3).in_column(31)
     end
   end
 
-  # and these should cause failiures
-
   context 'class with a lookup call in params' do
-    let(:msg) { 'lookup() function call found in class. Only use in class params.' }
+    let(:msg) { 'lookup() function call found in class params.' }
 
     let(:code) do
       <<-EOS
@@ -78,7 +83,7 @@ describe 'lookup' do
   end
 
   context 'class with a lookup call in class' do
-    let(:msg) { 'lookup() function call found in class. Only use in class params.' }
+    let(:msg) { 'lookup() function call found in class.' }
 
     let(:code) do
       <<-EOS
