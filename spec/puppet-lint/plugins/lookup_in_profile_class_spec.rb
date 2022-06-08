@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'lookup' do
+describe 'lookup_in_profile_class' do
   context 'class with no lookup calls' do
     let(:code) do
       <<-EOS
@@ -35,13 +35,12 @@ describe 'lookup' do
     end
   end
 
-  # and these should cause failiures
-  context 'profile with a lookup call in class' do
-    let(:msg) { 'lookup() function call found in profile class. Only use in profile params.' }
+  context 'class with a lookup call in class' do
+    let(:msg) { 'lookup() function call found in class.' }
 
     let(:code) do
       <<-EOS
-        class profile::lookup_call_class {
+        class lookup_call_class {
           file { '/tmp/foo':
             content => lookup('some_key'),
           }
@@ -49,12 +48,8 @@ describe 'lookup' do
       EOS
     end
 
-    it 'should detect a single problem' do
-      expect(problems).to have(1).problems
-    end
-
-    it 'should create an error' do
-      expect(problems).to contain_error(msg).on_line(3).in_column(31)
+    it 'should not detect any problems' do
+      expect(problems).to have(0).problem
     end
   end
 
@@ -73,21 +68,19 @@ describe 'lookup' do
       EOS
     end
 
-    it 'should detect a single problem' do
-      expect(problems).to have(1).problems
+    it 'should not detect any problems' do
+      expect(problems).to have(0).problems
     end
 
-    it 'should create an error' do
-      expect(problems).to contain_error(msg).on_line(2).in_column(29)
-    end
   end
 
-  context 'class with a lookup call in class' do
-    let(:msg) { 'lookup() function call found in class.' }
+  # and these should cause failiures
+  context 'profile with a lookup call in class' do
+    let(:msg) { 'lookup() function call found in profile class. Only use in profile params.' }
 
     let(:code) do
       <<-EOS
-        class lookup_call_class {
+        class profile::lookup_call_class {
           file { '/tmp/foo':
             content => lookup('some_key'),
           }
@@ -96,7 +89,7 @@ describe 'lookup' do
     end
 
     it 'should detect a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems).to have(1).problems
     end
 
     it 'should create an error' do

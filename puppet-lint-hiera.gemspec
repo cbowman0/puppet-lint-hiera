@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'puppet-lint-hiera'
-  spec.version     = '0.0.1'
+  spec.version     = '0.0.2'
   spec.author      = 'Garrett Rowell'
   spec.email       = 'garrett@puppet.com'
   spec.files       = Dir[
