@@ -1,5 +1,7 @@
 # puppet-lint hiera functions check
 
+[![Gem Version](https://badge.fury.io/rb/puppet-lint-hiera.svg)](https://badge.fury.io/rb/puppet-lint-hiera)
+
 ## Installation
 To add the provided lint checks into a module utilizing the PDK:
 
