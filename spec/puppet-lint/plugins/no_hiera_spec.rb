@@ -13,7 +13,7 @@ describe 'no_hiera' do
     end
 
     it 'should not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems.size).to eq(0)
     end
   end
 
@@ -33,7 +33,7 @@ describe 'no_hiera' do
     end
 
     it 'should detect a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'should create an error' do
@@ -57,7 +57,7 @@ describe 'no_hiera' do
     end
 
     it 'should detect a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'should create an error' do
