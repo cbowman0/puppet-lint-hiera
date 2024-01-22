@@ -13,7 +13,7 @@ describe 'lookup_in_class_params' do
     end
 
     it 'should not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems.size).to eq(0)
     end
   end
 
@@ -31,7 +31,7 @@ describe 'lookup_in_class_params' do
     end
 
     it 'should not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems.size).to eq(0)
     end
   end
 
@@ -49,7 +49,7 @@ describe 'lookup_in_class_params' do
     end
 
     it 'should not detect any problems' do
-      expect(problems).to have(0).problem
+      expect(problems.size).to eq(0)
     end
   end
 
@@ -67,7 +67,7 @@ describe 'lookup_in_class_params' do
     end
 
     it 'should not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems.size).to eq(0)
     end
   end
 
@@ -88,7 +88,7 @@ describe 'lookup_in_class_params' do
     end
 
     it 'should detect a single problem' do
-      expect(problems).to have(1).problems
+      expect(problems.size).to eq(1)
     end
 
     it 'should create an error' do
