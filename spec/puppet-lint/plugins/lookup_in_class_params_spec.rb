@@ -95,4 +95,27 @@ describe 'lookup_in_class_params' do
       expect(problems).to contain_error(msg).on_line(2).in_column(29)
     end
   end
+
+   # Defined types
+  context 'Define with a lookup call in params' do
+    let(:msg) { 'lookup() function call found in defined type params.' }
+
+    let(:code) do
+      <<-EOS
+        define lookup_call_params (
+          $content = lookup('some_key')
+        ) {
+          file { '/tmp/foo':
+            content => $content,
+          }
+        }
+      EOS
+    end
+
+    it 'should not detect a single problem' do
+      expect(problems.size).to eq(0)
+    end
+
+  end
+
 end
